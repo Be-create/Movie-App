@@ -2,7 +2,7 @@
 
 ![React Vite Movie App](app-screenshot.png)
 
-Welcome to the React Vite Movie App! This app allows you to explore and discover information about various movies. It's built using React with Vite as the development tool.
+Welcome to the Watcher Movie App! This app allows you to explore and discover information about various movies. It's built using React with Vite as the development tool.
 
 ## Features
 
