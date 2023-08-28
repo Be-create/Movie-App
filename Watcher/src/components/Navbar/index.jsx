@@ -1,11 +1,34 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
-import { Box, Typography } from "@mui/material";
+import React, { Component } from "react";
+import { Box, Popover, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import CategoryIcon from "@mui/icons-material/Category";
 import SortIcon from "@mui/icons-material/Sort";
-export const Navbar = () => {
+import { Heading } from "../Heading";
+import excludeVariablesFromRoot from "@mui/material/styles/excludeVariablesFromRoot";
+
+export const Navbar = (Props) => {
+  const [filterAnchorEl, setFilterAnchorEl] = React.useState(null);
+  const [sortAnchorEl, setSortAnchorEl] = React.useState(null);
+  const handleSortClick = (event) => {
+    setSortAnchorEl(event.currentTarget);
+  };
+  const handleSortClose = () => {
+    setSortAnchorEl(null);
+  };
+
+  const handleFilterClick = (event) => {
+    setFilterAnchorEl(event.currentTarget);
+  };
+
+  const handleFilterClose = () => {
+    setFilterAnchorEl(null);
+  };
+
+  const filterOpen = Boolean(filterAnchorEl);
+  const sortOpen = Boolean(sortAnchorEl);
+
   return (
     <Box
       sx={{
@@ -23,9 +46,10 @@ export const Navbar = () => {
           paddingBottom: { xs: "3vw", md: "0.75vw" },
         }}
       >
-        <Typography fontWeight="bold" fontSize={{ md: "22px" }}>
+        {/* <Typography fontWeight="bold" fontSize={{ md: "22px" }}>
           Watcher{" "}
-        </Typography>
+        </Typography> */}
+        <Heading title="Watcher" />
         <Box sx={{ justifySelf: "flex-start" }}>
           {/* <Typography fontWeight="bold" fontSize="22px">
             Popular Categories
@@ -54,11 +78,64 @@ export const Navbar = () => {
           }}
         >
           <SearchIcon />
-          <FilterListIcon />
+          <FilterListIcon onClick={(event) => handleFilterClick(event)} />
           {/* <CategoryIcon /> */}
-          <SortIcon />
+          <SortIcon onClick={(event) => handleSortClick(event)} />
         </Box>
       </Box>
+
+      <Popover
+        open={filterOpen}
+        anchorEl={filterAnchorEl}
+        onClose={handleFilterClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <Typography
+          sx={{ p: 1, cursor: "pointer" }}
+          onClick={() => Props.handleFilter("ratingLow")}
+        >
+          Rating:low
+        </Typography>
+        <Typography
+          sx={{ p: 1, cursor: "pointer" }}
+          onClick={() => Props.handleFilter("ratingHigh")}
+        >
+          Rating:High
+        </Typography>
+      </Popover>
+      <Popover
+        open={sortOpen}
+        anchorEl={sortAnchorEl}
+        onClose={handleSortClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <Typography
+          sx={{ p: 1, cursor: "pointer" }}
+          onClick={() => Props.handleSort("title")}
+        >
+          Title
+        </Typography>
+        <Typography
+          sx={{ p: 1, cursor: "pointer" }}
+          onClick={() => Props.handleSort("popularity")}
+        >
+          Popularity
+        </Typography>
+      </Popover>
     </Box>
   );
 };

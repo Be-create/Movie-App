@@ -7,14 +7,22 @@ export const MovieCard = (Props) => {
     <Box
       elevation={2}
       sx={{
-        borderRadius: "5%",
+        display: "flex",
+        borderRadius: "10%",
         backgroundColor: "#b1b1b6",
         height: { xs: "15vw", md: "15vw" },
-        width: { xs: "50vw", md: "30vw" },
+        width: { xs: "50vw", md: "28vw" },
         backgroundImage: `url(${Props.image})`,
+        justifyContent: "flex-end",
+        alignItems: "end",
       }}
     >
-      <Typography fontWeight="bold" fontSize={{ md: "22px" }}>
+      <Typography
+        sx={{ color: "#fcfaf9" }}
+        fontWeight="bold"
+        // fontSize={{ md: "22px" }}
+        variant="h4"
+      >
         {Props.title}
       </Typography>
     </Box>

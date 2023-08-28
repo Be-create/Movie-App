@@ -1,0 +1,17 @@
+body {
+  /* font: 400 1em/1.5 "Neuton"; */
+  background: #090d00;
+  color: rgba(255, 255, 255, 0.25);
+  margin: 0;
+}
+
+/* Animate Background Image */
+
+@-webkit-keyframes ben {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}

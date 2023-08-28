@@ -1,61 +1,49 @@
 /* eslint-disable no-unused-vars */
-import { Box, Button, Card, CardMedia, Grid } from "@mui/material";
+import { Box, Button, Card, CardMedia, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { MovieCard } from "../../components/Cards";
+import { Heading } from "../../components/Heading";
 
-export const HomePage = () => {
-  const [movieData, setMovieData] = useState();
-  const fetchdata = async () => {
-    try {
-      const url = "https://api.themoviedb.org/3/movie/popular?page=1";
-      const options = {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMjcxYjVjNzNmMjlhODA3MTcxMmZmNDlkZTc3OTA4NCIsInN1YiI6IjYyZTM1NGE4ZGY4NTdjMDA2NDAwYWMwZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1CZpImQVwRYZeFTO7Y-ynaSyNX-bz2nhd0rhVFkl5Oo",
-        },
-      };
-
-      const res = await fetch(url, options);
-      const data = await res.json();
-      setMovieData(data.results);
-      console.log(movieData);
-    } catch (error) {
-      console.log("error");
-    }
-  };
-  useEffect(() => {
-    fetchdata();
-  }, []);
-
+export const HomePage = (Props) => {
+  console.log("Child Rendered");
   return (
-    <Box>
-      <Box sx={{ paddingTop: { xs: "5vw", md: "1vw" } }}>
+    <Box sx={{ width: "100%", boxSizing: "border-box" }}>
+      <Box
+        sx={{
+          paddingTop: { xs: "5vw", md: "2vw" },
+          paddingRight: { xs: "5vw", md: "2vw" },
+          paddingLeft: { xs: "5vw", md: "2vw" },
+          paddingBottom: { xs: "5vw", md: "2vw" },
+          // paddingTop: { xs: "5vw", md: "1vw" },
+          boxSizing: "border-box",
+          // backgroundColor: "rgba(57, 52, 73, 1)",
+        }}
+      >
         <Box
           sx={{
+            width: "100%",
             display: "flex",
-            width: "100vw",
-            height: "20vw",
-            overflowX: "scroll",
-            overflowY: "hidden",
-            backgroundColor: "red",
-            gap: { xs: "1.5vw", md: "1vw" },
-            paddingTop: { xs: "5vw", md: "1vw" },
-            // "&::-webkit-scrollbar": { display: "none" },
+            textAlign: "center",
+            justifyContent: "center",
+            paddingBottom: { xs: "5vw", md: "0.75vw" },
+            // backgroundColor: "red",
           }}
         >
-          {movieData?.map((elem, index) => (
-            <Box key={index}>
+          <Heading title="Popular Movies" />
+        </Box>
+        <Grid container spacing={2.5}>
+          {Props.movieData?.map((elem, index) => (
+            <Grid item xs={2} md={4} key={index}>
+              {/* <Typography>{elem.title}</Typography> */}
               <MovieCard
                 image={`https://image.tmdb.org/t/p/w500${elem.backdrop_path}`}
-                title={elem.title}
+                title={elem.vote_average}
               >
                 <Button>Watch</Button>
               </MovieCard>
-            </Box>
+            </Grid>
           ))}
-        </Box>
+        </Grid>
       </Box>
     </Box>
   );
