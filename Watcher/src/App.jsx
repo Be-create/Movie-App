@@ -9,19 +9,20 @@ function App() {
   const [movieData, setMovieData] = useState();
   const fetchdata = async () => {
     try {
-      const url = "https://api.themoviedb.org/3/movie/popular?page=1";
-      const options = {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMjcxYjVjNzNmMjlhODA3MTcxMmZmNDlkZTc3OTA4NCIsInN1YiI6IjYyZTM1NGE4ZGY4NTdjMDA2NDAwYWMwZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1CZpImQVwRYZeFTO7Y-ynaSyNX-bz2nhd0rhVFkl5Oo",
-        },
-      };
+      const url = "https://watchermovieapi2.onrender.com/api/movies";
+      // const options = {
+      //   method: "GET",
+      //   headers: {
+      //     accept: "application/json",
+      //     Authorization:
+      //       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMjcxYjVjNzNmMjlhODA3MTcxMmZmNDlkZTc3OTA4NCIsInN1YiI6IjYyZTM1NGE4ZGY4NTdjMDA2NDAwYWMwZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1CZpImQVwRYZeFTO7Y-ynaSyNX-bz2nhd0rhVFkl5Oo",
+      //   },
+      // };
 
-      const res = await fetch(url, options);
-      const data = await res.json();
-      setMovieData(data.results);
+      const res = await fetch(url);
+      const response = await res.json();
+      console.log(response.data);
+      setMovieData(response.data);
       console.log(movieData);
     } catch (error) {
       console.log("error");
