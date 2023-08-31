@@ -37,7 +37,8 @@ export const HomePage = (Props) => {
               {/* <Typography>{elem.title}</Typography> */}
               <MovieCard
                 image={`https://image.tmdb.org/t/p/w500${elem.backdrop_path}`}
-                title={elem.vote_average}
+                title={elem.title}
+                rating={elem.vote_average}
               >
                 <Button>Watch</Button>
               </MovieCard>
